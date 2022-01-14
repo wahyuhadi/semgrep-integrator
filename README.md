@@ -30,4 +30,11 @@ rules:
 - Slack 
 - Etc..
 
-![sc](/img.png)
+Push data to github issue
+---
+![sc](/img/img.png)
+
+push data to elastic
+---
+![el](/img/el.png)
+![kibana](/img/elastic.png)

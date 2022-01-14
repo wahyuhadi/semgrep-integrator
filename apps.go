@@ -12,8 +12,15 @@ import (
 
 var (
 	issue = flag.Bool("gi", false, "Create issue to github")
+
 	owner = flag.String("o", "", "Owner or Org repo")
 	repo  = flag.String("r", "", "Repository name")
+
+	epush  = flag.Bool("ep", false, "Elastic push")
+	eurl   = flag.String("eurl", "http://127.0.0.1:9200", "Elastic URL")
+	euser  = flag.String("euser", "", "elastic users")
+	epass  = flag.String("epass", "", "elastic pass")
+	eindex = flag.String("eindex", "semgrep-sast", "elastic index")
 )
 
 func parseOptions() (opts *models.Options) {
@@ -23,6 +30,11 @@ func parseOptions() (opts *models.Options) {
 		Owner:       *owner,
 		RepoName:    *repo,
 		GithubToken: os.Getenv("semgrep_integ"),
+		Elasic:      *epush,
+		ElasticUrl:  *eurl,
+		ElasticUser: *euser,
+		ElasticPass: *epass,
+		ElasicIndex: *eindex,
 	}
 }
 
@@ -35,6 +47,11 @@ func main() {
 	// report to github issue
 	if opts.GithubIssue {
 		services.CreateGithubIssue(opts)
+	}
+
+	// push data to Elasticsearch
+	if opts.Elasic {
+		services.Elastic(opts)
 	}
 
 	// todo something magic

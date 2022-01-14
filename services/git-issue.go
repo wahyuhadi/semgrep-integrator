@@ -23,18 +23,20 @@ func CreateGithubIssue(opts *models.Options) {
 	err := json.NewDecoder(os.Stdin).Decode(&semgrep)
 	if err != nil {
 		gologger.Info().Str("Error", fmt.Sprintf("%v", err.Error())).Msg("Error json decoder")
+		return
 	}
 	if len(semgrep.Results) > 0 {
 		for _, data := range semgrep.Results {
-			body := models.CreateTempalte(data)
+			template := models.CreateTemplateGithubIssue(data)
 			input := &github.IssueRequest{
 				Title:  github.String(data.Extra.Metadata.Issue),
-				Body:   github.String(body),
+				Body:   github.String(template),
 				Labels: &[]string{"Bug", "Security"},
 			}
 			issue, _, err := client.Issues.Create(ctx, opts.Owner, opts.RepoName, input)
 			if err != nil {
 				gologger.Info().Str("Error", fmt.Sprintf("%v", err.Error())).Msg("Error when create issue")
+				break
 			}
 			gologger.Info().Str("Issue", fmt.Sprintf("%s", data.Extra.Metadata.Issue)).Str("Issue Number", fmt.Sprintf("%v", *issue.Number)).Msg("Success Create issue on github repo")
 		}

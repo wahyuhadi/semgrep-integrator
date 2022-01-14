@@ -24,10 +24,10 @@ type Semgrep struct {
 				Severity      string   `json:"severity"`
 				Category      string   `json:"category"`
 				Cwe           string   `json:"cwe"`
-				Impact        string   `json:"impact"`
+				Impact        []string `json:"impact"`
 				Owasp         string   `json:"owasp"`
-				References    string   `json:"references"`
-				Remediation   string   `json:"remediation"`
+				References    []string `json:"references"`
+				Remediation   []string `json:"remediation"`
 				SourceRuleURL string   `json:"source-rule-url"`
 				Technology    []string `json:"technology"`
 			} `json:"metadata"`
@@ -60,10 +60,10 @@ type Results struct {
 			Severity      string   `json:"severity"`
 			Category      string   `json:"category"`
 			Cwe           string   `json:"cwe"`
-			Impact        string   `json:"impact"`
+			Impact        []string `json:"impact"`
 			Owasp         string   `json:"owasp"`
-			References    string   `json:"references"`
-			Remediation   string   `json:"remediation"`
+			References    []string `json:"references"`
+			Remediation   []string `json:"remediation"`
 			SourceRuleURL string   `json:"source-rule-url"`
 			Technology    []string `json:"technology"`
 		} `json:"metadata"`
@@ -79,7 +79,7 @@ type Results struct {
 	} `json:"start"`
 }
 
-func CreateTempalte(parse interface{}) (body string) {
+func CreateTemplateGithubIssue(parse interface{}) (body string) {
 	var data Results
 	mapstructure.Decode(parse, &data)
 	issue := fmt.Sprintf("**Issue : %s**\n ", data.Extra.Metadata.Issue)
