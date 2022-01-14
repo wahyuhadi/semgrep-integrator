@@ -2,8 +2,9 @@
 
 ### Scan your code with custom rules and integrate it with anything, anytime, anywhere
 
+![Flow](/img/fl.png)
 ----
-- Example Gorm SQL-Inection rule with .yml
+- Example Gorm SQL-Injection rule with .yml
 ```yml
 # yamllint disable-line rule:document-start
 rules:
