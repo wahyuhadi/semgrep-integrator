@@ -24,9 +24,9 @@ rules:
 ```
 
 # Will be integrate with:
-- Github
+- Github (done)
 - Jira
-- Elastic
+- Elastic (done)
 - Slack 
 - Etc..
 
