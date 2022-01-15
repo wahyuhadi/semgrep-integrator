@@ -40,12 +40,13 @@ func parseOptions() (opts *models.Options) {
 
 func main() {
 	opts := parseOptions()
-	if opts.GithubToken == "" {
-		gologger.Info().Str("Error", fmt.Sprintf("%v", "no gittoken found")).Msg("Add semgrep_integ in .zshrc")
-		return
-	}
+
 	// report to github issue
 	if opts.GithubIssue {
+		if opts.GithubToken == "" {
+			gologger.Info().Str("Error", fmt.Sprintf("%v", "no gittoken found")).Msg("Add semgrep_integ in .zshrc")
+			return
+		}
 		services.CreateGithubIssue(opts)
 	}
 
