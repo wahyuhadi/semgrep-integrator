@@ -3,6 +3,7 @@ module github.com/wahyuhadi/semgrep-integrator
 go 1.17
 
 require (
+	github.com/andygrunwald/go-jira v1.15.1
 	github.com/elastic/go-elasticsearch/v8 v8.0.0-alpha
 	github.com/google/go-github v17.0.0+incompatible
 	github.com/mitchellh/mapstructure v1.4.3
@@ -13,12 +14,16 @@ require (
 
 require (
 	github.com/elastic/elastic-transport-go/v8 v8.0.0-alpha // indirect
+	github.com/fatih/structs v1.1.0 // indirect
+	github.com/golang-jwt/jwt/v4 v4.3.0 // indirect
 	github.com/golang/protobuf v1.4.2 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/logrusorgru/aurora v2.0.3+incompatible // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
+	github.com/trivago/tgo v1.0.7 // indirect
 	golang.org/x/net v0.0.0-20200822124328-c89045814202 // indirect
 	google.golang.org/appengine v1.6.6 // indirect
 	google.golang.org/protobuf v1.25.0 // indirect

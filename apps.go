@@ -21,6 +21,7 @@ var (
 	euser  = flag.String("euser", "", "elastic users")
 	epass  = flag.String("epass", "", "elastic pass")
 	eindex = flag.String("eindex", "semgrep-sast", "elastic index")
+	jira   = flag.Bool("jira", false, "auto create issue on jira")
 )
 
 func parseOptions() (opts *models.Options) {
@@ -35,6 +36,12 @@ func parseOptions() (opts *models.Options) {
 		ElasticUser: *euser,
 		ElasticPass: *epass,
 		ElasicIndex: *eindex,
+
+		// Jira part
+		Jira:      *jira,
+		JiraUser:  os.Getenv("jira_user"),
+		JiraToken: os.Getenv("jira_token"),
+		JiraURI:   os.Getenv("jira_url"),
 	}
 }
 
@@ -57,6 +64,10 @@ func main() {
 
 	// todo something magic
 	// Jira
+	// auto create issue in Jira
+	if opts.Jira {
+		services.Jira(opts)
+	}
 	// Elastic
 	// Slack
 }

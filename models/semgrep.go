@@ -89,3 +89,16 @@ func CreateTemplateGithubIssue(parse interface{}) (body string) {
 	body = issue + severity + filename + impact
 	return body
 }
+
+func CreateSummaryJira(data interface{}) (summ string) {
+	var semgrep Results
+	mapstructure.Decode(data, &semgrep)
+	Desc := fmt.Sprintf("Desc : %s\n", semgrep.Extra.Message)
+	Impact := fmt.Sprintf("Impact : %s\n", semgrep.Extra.Metadata.Impact)
+	Path := fmt.Sprintf("Path : %v:%v:%v\n", semgrep.Path, semgrep.Start.Line, semgrep.Start.Col)
+	Severity := fmt.Sprintf("Severity : %s\n", semgrep.Extra.Metadata.Severity)
+
+	summ = Desc + Impact + Path + Severity
+	fmt.Println(summ)
+	return summ
+}
